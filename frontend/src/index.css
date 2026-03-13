@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@700;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --background: 266 50% 7%;
+    --foreground: 0 0% 96%;
+    --card: 268 58% 12%;
+    --card-foreground: 0 0% 96%;
+    --popover: 268 58% 12%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 194 84% 62%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 326 93% 56%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 265 35% 17%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 37 100% 50%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 340 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.15;
+    --input: 0 0% 100% / 0.12;
+    --ring: 194 84% 62%;
+    --chart-1: 194 84% 62%;
+    --chart-2: 326 93% 56%;
+    --chart-3: 37 100% 50%;
+    --chart-4: 265 76% 43%;
+    --chart-5: 252 68% 46%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Outfit", sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background: #0f0818;
+  }
+  button,
+  input,
+  select {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+@layer base {
+  [data-debug-wrapper="true"] {
+    display: contents !important;
+  }
+
+  [data-debug-wrapper="true"] > * {
+    margin-left: inherit;
+    margin-right: inherit;
+    margin-top: inherit;
+    margin-bottom: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    padding-top: inherit;
+    padding-bottom: inherit;
+    column-gap: inherit;
+    row-gap: inherit;
+    gap: inherit;
+    border-left-width: inherit;
+    border-right-width: inherit;
+    border-top-width: inherit;
+    border-bottom-width: inherit;
+    border-left-style: inherit;
+    border-right-style: inherit;
+    border-top-style: inherit;
+    border-bottom-style: inherit;
+    border-left-color: inherit;
+    border-right-color: inherit;
+    border-top-color: inherit;
+    border-bottom-color: inherit;
+  }
+}

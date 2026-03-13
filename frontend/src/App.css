@@ -1,0 +1,5 @@
+.loop-glow {
+  box-shadow:
+    0 0 10px rgba(76, 201, 240, 0.3),
+    0 0 20px rgba(76, 201, 240, 0.1);
+}
