@@ -542,8 +542,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=os.environ.get("CORS_ORIGINS", "https://logic-looper-theta.vercel.app").split(","),
-    allow_methods=["https://logic-looper-theta.vercel.app"],
-    allow_headers=["https://logic-looper-theta.vercel.app"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
