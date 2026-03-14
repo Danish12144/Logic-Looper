@@ -536,7 +536,7 @@ async def my_heatmap(user_doc: Dict[str, Any] = Depends(current_user)) -> Heatma
     return HeatmapResponse(points=points)
 
 
-app.include_router(api_router)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -546,6 +546,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(api_router)
 
 @app.on_event("shutdown")
 async def shutdown_db_client() -> None:
