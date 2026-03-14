@@ -8,7 +8,7 @@ if (!BACKEND_URL) {
 
 const api = axios.create({
   baseURL: `${BACKEND_URL}/api`,
-  timeout: 10000,
+  timeout: 30000,
 });
 
 export const loginGuest = async (name) => {
