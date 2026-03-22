@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { Lightbulb } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function SymbolGridPuzzle({
@@ -100,17 +101,21 @@ export default function SymbolGridPuzzle({
         <span>2 of each per row and column</span>
       </div>
 
-  {hintsRemaining > 0 && !solved && (
-  <Button
-    type="button"
-    variant="ghost"
-    onClick={onUseHint}
-    className="rounded-full border border-white/20"
-  >
-    <span className="mr-2">💡</span>
-    Use hint ({hintsRemaining} left)
-        </button>
-      )}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={onUseHint}
+          disabled={hintsRemaining < 1}
+          className="rounded-full border border-white/20"
+        >
+          <Lightbulb className="mr-2 h-4 w-4" />
+          Use hint ({hintsRemaining} left)
+        </Button>
+        <span className="text-sm">
+          {solved ? "Solved ✓" : "Awaiting answer"}
+        </span>
+      </div>
 
       {hintText && (
         <div className="rounded-xl border border-primary/30 bg-primary/10 p-3 text-sm text-white/80">
