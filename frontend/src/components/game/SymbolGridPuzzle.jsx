@@ -35,7 +35,47 @@ export default function SymbolGridPuzzle({
       toast.error("Fill all empty cells first!");
       return;
     }
-    if (JSON.stringify(playerGrid) === puzzle.solution) {
+
+    const symbols = ["◆", "▲"];
+    let valid = true;
+
+    // Check each row — exactly 2 of each symbol
+    for (let r = 0; r < 4; r++) {
+      for (const sym of symbols) {
+        if (playerGrid[r].filter((c) => c === sym).length !== 2) {
+          valid = false;
+        }
+      }
+    }
+
+    // Check each column — exactly 2 of each symbol
+    for (let c = 0; c < 4; c++) {
+      for (const sym of symbols) {
+        if (playerGrid.map((row) => row[c]).filter((v) => v === sym).length !== 2) {
+          valid = false;
+        }
+      }
+    }
+
+    // No 3 same adjacent horizontally
+    for (let r = 0; r < 4; r++) {
+      for (let c = 0; c < 2; c++) {
+        if (playerGrid[r][c] === playerGrid[r][c+1] && playerGrid[r][c+1] === playerGrid[r][c+2]) {
+          valid = false;
+        }
+      }
+    }
+
+    // No 3 same adjacent vertically
+    for (let c = 0; c < 4; c++) {
+      for (let r = 0; r < 2; r++) {
+        if (playerGrid[r][c] === playerGrid[r+1][c] && playerGrid[r+1][c] === playerGrid[r+2][c]) {
+          valid = false;
+        }
+      }
+    }
+
+    if (valid) {
       const secondsSpent = startedAt
         ? Math.max(5, Math.floor((Date.now() - startedAt) / 1000))
         : 30;
