@@ -233,8 +233,9 @@ def calculate_streak(solved_dates: List[str]) -> int:
 
 def validate_puzzle_event_security(event: PuzzleEvent) -> None:
     day_date = datetime.strptime(event.day_key, "%Y-%m-%d").date()
-    today = datetime.now().date()
-    if day_date > today:
+    today = datetime.now(timezone.utc).date()
+    tomorrow = today + timedelta(days=1)
+    if day_date > tomorrow:
         raise HTTPException(status_code=400, detail="Future dates are not allowed")
     if event.time_spent_seconds < 5:
         raise HTTPException(status_code=400, detail="Unrealistic completion time")
