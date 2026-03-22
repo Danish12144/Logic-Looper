@@ -22,7 +22,7 @@ export default function HomePage() {
           className="overflow-hidden rounded-3xl border border-white/10 bg-white/5"
           data-testid="homepage-hero-card"
         >
-          <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden" data-testid="homepage-hero-image-container">
+          <div className="relative aspect-[16/9] sm:aspect-[16/10] w-full overflow-hidden"
             <img
               src={heroImage}
               alt="Neon abstract puzzle world"
