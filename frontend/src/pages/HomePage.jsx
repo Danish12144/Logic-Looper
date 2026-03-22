@@ -14,7 +14,7 @@ export default function HomePage() {
       title="Logic Looper"
       subtitle="365 date-seeded logic loops. Play daily, keep the streak burning."
     >
-      <section className="grid gap-6 lg:grid-cols-[1.4fr_1fr]" data-testid="homepage-main-grid">
+     <section className="grid gap-4 sm:gap-6 lg:grid-cols-[1.4fr_1fr]" data-testid="homepage-main-grid">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ export default function HomePage() {
           className="overflow-hidden rounded-3xl border border-white/10 bg-white/5"
           data-testid="homepage-hero-card"
         >
-          <div className="relative aspect-[16/10] w-full overflow-hidden" data-testid="homepage-hero-image-container">
+          <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden" data-testid="homepage-hero-image-container">
             <img
               src={heroImage}
               alt="Neon abstract puzzle world"
@@ -31,8 +31,8 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0F0818] via-[#0F0818]/40 to-transparent" />
           </div>
-          <div className="space-y-5 p-6">
-            <h2 className="text-2xl font-bold sm:text-3xl" data-testid="homepage-hero-title">
+          <div className="space-y-4 p-4 sm:p-6">
+            <h2 className="text-xl font-bold sm:text-3xl" data-testid="homepage-hero-title">
               Brain gym meets arcade energy.
             </h2>
             <p className="max-w-xl text-sm text-white/80 sm:text-base" data-testid="homepage-hero-description">
@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="space-y-6" data-testid="homepage-sidebar-stack">
           <AuthPanel />
 
-          <div className="grid gap-3" data-testid="homepage-feature-cards-grid">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1" data-testid="homepage-feature-cards-grid">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4" data-testid="feature-card-offline-first">
               <p className="mb-2 inline-flex items-center gap-2 text-sm font-semibold">
                 <Brain className="h-4 w-4 text-primary" />
