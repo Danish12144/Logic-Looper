@@ -56,7 +56,7 @@ const renderPuzzleData = (puzzle) => {
       </div>
     );
   }
-
+  if (!puzzle.data.rows) return null;
   return (
     <div className="space-y-2" data-testid="puzzle-binary-logic-table">
       <p className="text-sm text-white/80" data-testid="binary-operator-label">
