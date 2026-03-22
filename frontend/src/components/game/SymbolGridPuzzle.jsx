@@ -8,11 +8,13 @@ export default function SymbolGridPuzzle({
   startedAt,
   setStartedAt,
   onSolve,
+  hintsRemaining,
+  onUseHint,
+  hintText,
 }) {
   const [playerGrid, setPlayerGrid] = useState(
     puzzle.data.grid.map((row) => [...row])
   );
-
   useEffect(() => {
     setPlayerGrid(puzzle.data.grid.map((row) => [...row]));
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,46 +37,28 @@ export default function SymbolGridPuzzle({
       toast.error("Fill all empty cells first!");
       return;
     }
-
     const symbols = ["◆", "▲"];
     let valid = true;
-
-    // Check each row — exactly 2 of each symbol
     for (let r = 0; r < 4; r++) {
       for (const sym of symbols) {
-        if (playerGrid[r].filter((c) => c === sym).length !== 2) {
-          valid = false;
-        }
+        if (playerGrid[r].filter((c) => c === sym).length !== 2) valid = false;
       }
     }
-
-    // Check each column — exactly 2 of each symbol
     for (let c = 0; c < 4; c++) {
       for (const sym of symbols) {
-        if (playerGrid.map((row) => row[c]).filter((v) => v === sym).length !== 2) {
-          valid = false;
-        }
+        if (playerGrid.map((row) => row[c]).filter((v) => v === sym).length !== 2) valid = false;
       }
     }
-
-    // No 3 same adjacent horizontally
     for (let r = 0; r < 4; r++) {
       for (let c = 0; c < 2; c++) {
-        if (playerGrid[r][c] === playerGrid[r][c+1] && playerGrid[r][c+1] === playerGrid[r][c+2]) {
-          valid = false;
-        }
+        if (playerGrid[r][c] === playerGrid[r][c+1] && playerGrid[r][c+1] === playerGrid[r][c+2]) valid = false;
       }
     }
-
-    // No 3 same adjacent vertically
     for (let c = 0; c < 4; c++) {
       for (let r = 0; r < 2; r++) {
-        if (playerGrid[r][c] === playerGrid[r+1][c] && playerGrid[r+1][c] === playerGrid[r+2][c]) {
-          valid = false;
-        }
+        if (playerGrid[r][c] === playerGrid[r+1][c] && playerGrid[r+1][c] === playerGrid[r+2][c]) valid = false;
       }
     }
-
     if (valid) {
       const secondsSpent = startedAt
         ? Math.max(5, Math.floor((Date.now() - startedAt) / 1000))
@@ -115,6 +99,22 @@ export default function SymbolGridPuzzle({
         <span>◆ ▲ — Tap empty cell to cycle</span>
         <span>2 of each per row and column</span>
       </div>
+
+      {hintsRemaining > 0 && !solved && (
+        <button
+          type="button"
+          onClick={onUseHint}
+          className="w-full rounded-full border border-white/20 bg-transparent py-2 text-sm text-white/70 hover:bg-white/5"
+        >
+          💡 Use hint ({hintsRemaining} left)
+        </button>
+      )}
+
+      {hintText && (
+        <div className="rounded-xl border border-primary/30 bg-primary/10 p-3 text-sm text-white/80">
+          Hint: {hintText}
+        </div>
+      )}
 
       {!solved && (
         <Button
