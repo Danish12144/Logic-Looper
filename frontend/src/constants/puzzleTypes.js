@@ -19,4 +19,9 @@ export const PUZZLE_TYPES = [
     title: "Binary Logic",
     description: "Evaluate tiny truth-table challenges.",
   },
+  {
+    id: "symbol_grid",
+    title: "Symbol Grid",
+    description: "Fill the grid so each row and column has exactly 2 of each symbol.",
+  },
 ];
