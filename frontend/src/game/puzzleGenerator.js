@@ -149,6 +149,54 @@ const createBinaryLogic = (rng) => {
     hint: `${operator} follows standard binary logic for each input pair.`,
   };
 };
+const createSymbolGrid = (rng) => {
+  const S = ["◆", "▲"];
+  const grid = Array.from({ length: 4 }, () => Array(4).fill(null));
+
+  const isValid = (g, row, col, symbol) => {
+    const rowCount = g[row].filter((c) => c === symbol).length;
+    const colCount = g.map((r) => r[col]).filter((c) => c === symbol).length;
+    if (col >= 2 && g[row][col-1] === symbol && g[row][col-2] === symbol) return false;
+    if (col >= 1 && col < 3 && g[row][col-1] === symbol && g[row][col+1] === symbol) return false;
+    if (row >= 2 && g[row-1][col] === symbol && g[row-2][col] === symbol) return false;
+    if (row >= 1 && row < 3 && g[row-1][col] === symbol && g[row+1] && g[row+1][col] === symbol) return false;
+    return rowCount < 2 && colCount < 2;
+  };
+
+  const fill = (g, row, col) => {
+    if (row === 4) return true;
+    const nextRow = col === 3 ? row + 1 : row;
+    const nextCol = col === 3 ? 0 : col + 1;
+    const order = rng() > 0.5 ? [S[0], S[1]] : [S[1], S[0]];
+    for (const sym of order) {
+      if (isValid(g, row, col, sym)) {
+        g[row][col] = sym;
+        if (fill(g, nextRow, nextCol)) return true;
+        g[row][col] = null;
+      }
+    }
+    return false;
+  };
+
+  fill(grid, 0, 0);
+
+  const solution = grid.map((row) => [...row]);
+  const allCells = Array.from({ length: 16 }, (_, i) => i);
+  const shuffled = allCells.sort(() => rng() - 0.5);
+  const hiddenCells = shuffled.slice(0, 8).map((idx) => `${Math.floor(idx / 4)}-${idx % 4}`);
+  hiddenCells.forEach((key) => {
+    const [r, c] = key.split("-").map(Number);
+    grid[r][c] = null;
+  });
+
+  return {
+    prompt: "Fill the grid: each row and column must have exactly 2 of each symbol. No 3 same in a row.",
+    data: { grid, hiddenCells },
+    options: ["◆", "▲"],
+    solution: JSON.stringify(solution),
+    hint: "Start with rows or columns that already have one symbol placed.",
+  };
+};
 
 export const validatePuzzleAnswer = (puzzle, answer) => `${puzzle.solution}` === `${answer}`;
 
@@ -160,6 +208,7 @@ export const generatePuzzle = (dayKey, puzzleType) => {
   if (puzzleType === "number_matrix") generated = createNumberMatrix(rng);
   else if (puzzleType === "pattern_matching") generated = createPatternPuzzle(rng);
   else if (puzzleType === "sequence_solver") generated = createSequenceSolver(rng, dayKey);
+  else if (puzzleType === "symbol_grid") generated = createSymbolGrid(rng);
   else generated = createBinaryLogic(rng);
 
   return {
