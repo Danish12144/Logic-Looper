@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "../ui/button";
 
 const renderPuzzleData = (puzzle) => {
+  if (puzzle.type === "symbol_grid") return null;
   if (puzzle.type === "number_matrix") {
     return (
       <div className="grid grid-cols-3 gap-2" data-testid="puzzle-number-matrix-grid">
