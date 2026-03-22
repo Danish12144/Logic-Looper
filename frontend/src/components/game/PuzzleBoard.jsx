@@ -172,6 +172,9 @@ export default function PuzzleBoard({
             startedAt={startedAt}
             setStartedAt={setStartedAt}
             onSolve={onSolve}
+            hintsRemaining={hintsRemaining}
+            onUseHint={handleHint}
+            hintText={hintText}
           />
         ) : (
           renderPuzzleData(puzzle)
