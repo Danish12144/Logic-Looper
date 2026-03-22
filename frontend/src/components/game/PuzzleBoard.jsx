@@ -1,3 +1,4 @@
+import SymbolGridPuzzle from "./SymbolGridPuzzle";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Lightbulb, Timer } from "lucide-react";
@@ -165,8 +166,20 @@ export default function PuzzleBoard({
         {puzzle.prompt}
       </p>
 
-      <div className="mb-5">{renderPuzzleData(puzzle)}</div>
-
+      <div className="mb-5">
+  {puzzle.type === "symbol_grid" ? (
+    <SymbolGridPuzzle
+      puzzle={puzzle}
+      solved={solved}
+      startedAt={startedAt}
+      setStartedAt={setStartedAt}
+      onSolve={onSolve}
+    />
+  ) : (
+    renderPuzzleData(puzzle)
+  )}
+    </div>
+    {puzzle.type !== "symbol_grid" && (
       <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {puzzle.options.map((option) => (
           <Button
