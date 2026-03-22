@@ -47,7 +47,7 @@ export default function GameLayout({ title, subtitle, children }) {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <nav className="flex flex-wrap items-center gap-2" data-testid="main-route-navigation">
+            <nav className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" data-testid="main-route-navigation">
               <NavLink to="/" className={navLinkClass} data-testid="nav-link-home">
                 Home
               </NavLink>
