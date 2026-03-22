@@ -78,7 +78,7 @@ class PuzzleEvent(BaseModel):
         "pattern_matching",
         "sequence_solver",
         "binary_logic",
-        "deduction_grid",
+        "symbol_grid",
     ]
     day_key: str = Field(min_length=10, max_length=10)
     score: int = Field(ge=0, le=500)
