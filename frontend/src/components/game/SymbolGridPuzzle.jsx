@@ -100,13 +100,15 @@ export default function SymbolGridPuzzle({
         <span>2 of each per row and column</span>
       </div>
 
-      {hintsRemaining > 0 && !solved && (
-        <button
-          type="button"
-          onClick={onUseHint}
-          className="w-full rounded-full border border-white/20 bg-transparent py-2 text-sm text-white/70 hover:bg-white/5"
-        >
-          💡 Use hint ({hintsRemaining} left)
+  {hintsRemaining > 0 && !solved && (
+  <Button
+    type="button"
+    variant="ghost"
+    onClick={onUseHint}
+    className="rounded-full border border-white/20"
+  >
+    <span className="mr-2">💡</span>
+    Use hint ({hintsRemaining} left)
         </button>
       )}
 
