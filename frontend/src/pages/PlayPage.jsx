@@ -241,7 +241,7 @@ export default function PlayPage() {
                   >
                     <span>{key}</span>
                     <span className="text-xs text-white/70" data-testid={`unlock-row-${key}-status`}>
-                      {isToday ? "Unlocked" : isCompleted ? "Completed" : "Locked"}
+                      {isToday ? "Unlocked" : isCompleted ? "Completed" : "Missed"}
                     </span>
                   </div>
                 );
