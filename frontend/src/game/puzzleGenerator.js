@@ -193,7 +193,7 @@ const createSymbolGrid = (rng) => {
     prompt: "Fill the grid: each row and column must have exactly 2 of each symbol. No 3 same in a row.",
     data: { grid, hiddenCells },
     options: ["◆", "▲"],
-    solution: JSON.stringify(solution),
+    solution: "grid_complete",
     hint: "Start with rows or columns that already have one symbol placed.",
   };
 };
