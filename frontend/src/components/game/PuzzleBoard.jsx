@@ -22,7 +22,6 @@ const renderPuzzleData = (puzzle) => {
       </div>
     );
   }
-
   if (puzzle.type === "pattern_matching") {
     return (
       <div className="flex flex-wrap gap-2" data-testid="puzzle-pattern-sequence-row">
@@ -38,7 +37,6 @@ const renderPuzzleData = (puzzle) => {
       </div>
     );
   }
-
   if (puzzle.type === "sequence_solver") {
     return (
       <div className="flex flex-wrap items-center gap-2" data-testid="puzzle-sequence-row">
@@ -128,7 +126,6 @@ export default function PuzzleBoard({
   const handleOptionPick = (value) => {
     if (solved || remainingSeconds === 0) return;
     if (!startedAt) setStartedAt(Date.now());
-
     setSelected(value);
     if (`${value}` === `${puzzle.solution}`) {
       const origin = startedAt || Date.now();
@@ -168,55 +165,59 @@ export default function PuzzleBoard({
       </p>
 
       <div className="mb-5">
-  {puzzle.type === "symbol_grid" ? (
-    <SymbolGridPuzzle
-      puzzle={puzzle}
-      solved={solved}
-      startedAt={startedAt}
-      setStartedAt={setStartedAt}
-      onSolve={onSolve}
-    />
-  ) : (
-    renderPuzzleData(puzzle)
-  )}
-    </div>
-    {puzzle.type !== "symbol_grid" && (
-      <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {puzzle.options.map((option) => (
-          <Button
-            key={`${puzzle.id}-${option}`}
-            type="button"
-            variant={selected === option ? "secondary" : "outline"}
-            onClick={() => handleOptionPick(option)}
-            className="h-12 border-white/20 bg-white/5 text-base"
-            data-testid={`answer-option-${option}`}
-          >
-            {option}
-          </Button>
-        ))}
+        {puzzle.type === "symbol_grid" ? (
+          <SymbolGridPuzzle
+            puzzle={puzzle}
+            solved={solved}
+            startedAt={startedAt}
+            setStartedAt={setStartedAt}
+            onSolve={onSolve}
+          />
+        ) : (
+          renderPuzzleData(puzzle)
+        )}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={handleHint}
-          disabled={hintsRemaining < 1}
-          className="rounded-full border border-white/20"
-          data-testid="use-hint-button"
-        >
-          <Lightbulb className="mr-2 h-4 w-4" />
-          Use hint ({hintsRemaining} left)
-        </Button>
-        <span className="text-sm" data-testid="active-puzzle-solved-state">
-          {solved ? "Solved ✓" : "Awaiting answer"}
-        </span>
-      </div>
+      {puzzle.type !== "symbol_grid" && (
+        <>
+          <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {puzzle.options.map((option) => (
+              <Button
+                key={`${puzzle.id}-${option}`}
+                type="button"
+                variant={selected === option ? "secondary" : "outline"}
+                onClick={() => handleOptionPick(option)}
+                className="h-12 border-white/20 bg-white/5 text-base"
+                data-testid={`answer-option-${option}`}
+              >
+                {option}
+              </Button>
+            ))}
+          </div>
 
-      {hintText && (
-        <div className="mt-4 rounded-xl border border-primary/30 bg-primary/10 p-3 text-sm" data-testid="active-puzzle-hint-text">
-          Hint: {hintText}
-        </div>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={handleHint}
+              disabled={hintsRemaining < 1}
+              className="rounded-full border border-white/20"
+              data-testid="use-hint-button"
+            >
+              <Lightbulb className="mr-2 h-4 w-4" />
+              Use hint ({hintsRemaining} left)
+            </Button>
+            <span className="text-sm" data-testid="active-puzzle-solved-state">
+              {solved ? "Solved ✓" : "Awaiting answer"}
+            </span>
+          </div>
+
+          {hintText && (
+            <div className="mt-4 rounded-xl border border-primary/30 bg-primary/10 p-3 text-sm" data-testid="active-puzzle-hint-text">
+              Hint: {hintText}
+            </div>
+          )}
+        </>
       )}
     </motion.section>
   );
