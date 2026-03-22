@@ -15,6 +15,7 @@ export default function SymbolGridPuzzle({
 
   useEffect(() => {
     setPlayerGrid(puzzle.data.grid.map((row) => [...row]));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [puzzle.id]);
 
   const toggleCell = (r, c) => {
